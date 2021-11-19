@@ -25,4 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 =======
 
 Front page for feel at home service
-hihi
+hihiggg

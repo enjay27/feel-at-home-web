@@ -7,6 +7,15 @@
     <router-view />
   </div>
 </template>
+<script>
+import NaviBar from "./components/layout/NaviBar.vue";
+export default ({
+  name: "App",
+  components: {
+    NaviBar,
+  },
+})
+</script>
 
 <style>
 #app {
