@@ -3,9 +3,9 @@
   <header class="header_section">
     <div class="container">
       <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand" href="index.html">
+        <router-link to="/" class="navbar-brand">
           <span> Feel at Home</span>
-        </a>
+        </router-link> 
 
         <button
           class="navbar-toggler"
@@ -35,7 +35,7 @@
             </li>
           </ul>
           <div class="user_option">
-            <a href="" class="user_link">
+            <a href="http://localhost:8888/login" class="user_link">
               <i class="fa fa-user" aria-hidden="true"></i>
             </a>
             <form class="form-inline">
