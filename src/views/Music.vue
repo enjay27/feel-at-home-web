@@ -3,12 +3,14 @@
     <div class="category">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item active">
-          <router-link :to="{ name: 'Player', params: { q: 'sad' } }" class="nav-link">
+          <router-link :to="{ name: 'Player', params: { q: 'pleasure' } }" class="nav-link">
             Pleasure</router-link
           >
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Player2' }" class="nav-link"> Depressed</router-link>
+          <router-link :to="{ name: 'Player2', params: { q: 'depressed' } }" class="nav-link">
+            Depressed</router-link
+          >
         </li>
       </ul>
     </div>

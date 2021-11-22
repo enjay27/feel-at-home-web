@@ -44,9 +44,6 @@ export default {
   created() {
     console.log(test);
     test.optionParams.q = this.$route.params.q;
-    console.log(test.optionParams.q);
-    console.log(test.arr[0]);
-    test.request(test.url, test.dataArray);
   },
 };
 </script>
