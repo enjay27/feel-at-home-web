@@ -1,5 +1,5 @@
 <template>
-  <div id="about">
+  <div id="player">
     <youtube :video-id="videoId" ref="youtube" @playing="playing" />
     <button @click="playVideo">play</button>
     <button @click="pauseVideo">pause</button>
