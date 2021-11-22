@@ -24,18 +24,20 @@ for (var option in optionParams) {
 //url의마지막에 붙어있는 & 정리
 url = url.substr(0, url.length - 1);
 
-request(url, function (err, res, body) {
+//request(url, dataArray);
+
+function dataArray(err, res, body) {
   // console.log(body)
 
   //json형식을 서버로 부터 받음
   var data = JSON.parse(body).items;
   for (var content in data) {
     //youtube downloader에 videoId 넘기면 됨.
-    console.log(data[content].snippet.title + " : " + data[content].id.videoId);
+    //console.log(data[content].snippet.title + " : " + data[content].id.videoId);
     arr[content] = data[content].id.videoId;
   }
-});
+}
 
-const test = { arr };
+const test = { arr, optionParams, request, url, dataArray };
 
 export default test;
