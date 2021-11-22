@@ -5,8 +5,10 @@ import Diary from "@/views/Diary.vue";
 import Music from "@/views/Music.vue";
 import Calendar from "@/components/diary/Calendar.vue";
 import Statics from "@/components/diary/Statics.vue";
+import VueYoutube from "vue-youtube";
 
 Vue.use(VueRouter);
+Vue.use(VueYoutube);
 
 const routes = [
   {
