@@ -1,8 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Diary from "../views/Diary.vue";
-import Music from "../views/Music.vue";
+import Home from "@/views/Home.vue";
+import Diary from "@/views/Diary.vue";
+import Music from "@/views/Music.vue";
+import Calendar from "@/components/diary/Calendar.vue";
+import Statics from "@/components/diary/Statics.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,6 +18,19 @@ const routes = [
     path: "/diary",
     name: "Diary",
     component: Diary,
+    redirect: "/diary/calendar",
+    children: [
+      {
+        path: "calendar",
+        name: "Calendar",
+        component: Calendar,
+      },
+      {
+        path: "statics",
+        name: "Statics",
+        component: Statics,
+      },
+    ],
   },
   {
     path: "/music",
