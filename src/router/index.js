@@ -3,9 +3,10 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Diary from "@/views/Diary.vue";
 import Music from "@/views/Music.vue";
-import Calendar from "@/components/diary/Calendar.vue";
+import Calendar from "@/components/diary/calendar.vue";
 import Statics from "@/components/diary/Statics.vue";
 import VueYoutube from "vue-youtube";
+import Player from "@/components/music/MusicPlayer.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
@@ -38,6 +39,19 @@ const routes = [
     path: "/music",
     name: "Music",
     component: Music,
+    props: true,
+    children: [
+      {
+        path: "player",
+        name: "Player",
+        component: Player,
+      },
+      {
+        path: "player2",
+        name: "Player2",
+        component: Player,
+      },
+    ],
   },
   {
     path: "/about",
