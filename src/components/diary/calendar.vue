@@ -2,7 +2,7 @@
   <div id="cal">
     <br />
     <div id="up">
-      green= good / red: sad / yellow : soso
+      [green= happy / red: sad / yellow : soso]
       <button id="diaryChartBtn"><i class="far fa-chart-bar"></i></button>
     </div>
     <br />
@@ -15,8 +15,8 @@
       @dayclick="onDayClick"
     />
     <br />
-    <p>{{ date }}</p>
-    <p>{{ days }}</p>
+    <!-- <p>{{ date }}</p>
+    <p>{{ days }}</p> -->
     <div class="memo">
       <textarea id="contents" name="contents" v-model="contents"></textarea>
       <button id="memoBtn" @click="registContents()">등록</button>
@@ -113,9 +113,13 @@ export default {
     },
     registContents() {
       axios
-        .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
-          document: { type: "PLAIN_TEXT", content: this.contents },
-        })
+        .post(
+          "https://language.googleapis.com/v1/documents:analyzeSentiment?key=" +
+            key.KEY,
+          {
+            document: { type: "PLAIN_TEXT", content: this.contents },
+          }
+        )
         .then(({ data }) => {
           //alert(data);
           console.log(data);
@@ -143,7 +147,9 @@ export default {
               sentiment: sentiment,
             });
           }
-          this.$emit("showModal", true);
+          this.$emit("showModal", { x: true, y: "sad" });
+          // this.$emit("showSentiment", sentiment);
+          // this.$emit("showModal", true);
         });
     },
   },

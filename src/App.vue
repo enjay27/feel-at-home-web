@@ -6,18 +6,18 @@
     <navi-bar />
     <router-view />
     <!-- <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> | -->
-    <footer-bar />
+    <!-- <footer-bar /> -->
   </div>
 </template>
 <script>
 import NaviBar from "./components/layout/NaviBar.vue";
-import FooterBar from "./components/layout/FooterBar.vue";
+//import FooterBar from "./components/layout/FooterBar.vue";
 
 export default {
   name: "App",
   components: {
     NaviBar,
-    FooterBar,
+    // FooterBar,
   },
 };
 </script>

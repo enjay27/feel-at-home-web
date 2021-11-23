@@ -35,8 +35,10 @@ export default {
     };
   },
   methods: {
-    onShowModal(isShow) {
-      this.showModal = isShow;
+    onShowModal({ x, y }) {
+      console.log(x + " " + y);
+      this.showModal = x;
+      this.sentiment = y;
     },
   },
 };
