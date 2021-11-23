@@ -46,7 +46,7 @@ const routes = [
     props: true,
     children: [
       {
-        path: "player",
+        path: "player/:q",
         name: "Player",
         component: Player,
       },

@@ -89,7 +89,7 @@ export default {
       this.date = day.id;
       console.log("onDayclick :" + day.id);
       console.log("onDayclick :" + day.date);
-
+      //this.$emit("showModal", { x: true, y: "Happy" });
       // const idx = this.days.findIndex((d) => d.id === day.id);
       // console.log(idx);
       // if (idx >= 0) {
@@ -147,7 +147,7 @@ export default {
               sentiment: sentiment,
             });
           }
-          this.$emit("showModal", { x: true, y: "sad" });
+          this.$emit("showModal", { x: true, y: sentiment });
           // this.$emit("showSentiment", sentiment);
           // this.$emit("showModal", true);
         });
