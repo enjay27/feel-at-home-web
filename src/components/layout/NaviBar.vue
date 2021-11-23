@@ -51,12 +51,29 @@
             >
               <i class="fa fa-user" aria-hidden="true"></i>
             </a>
-            <button v-show="isLogin" @click="logout()" class="order_online">
-              Logout
-            </button>
-            <router-link :to="{ name: 'Mypage' }" class="nav-link">
-              <button v-show="isLogin" class="order_online">Mypage</button>
+            <a
+              v-show="isLogin"
+              @click="logout()"
+              class="tooltips"
+              style="color: white"
+            >
+              <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+              <span class="tooltipstext">Logut</span>
+            </a>
+
+            <router-link :to="{ name: 'Mypage' }">
+              <a v-show="isLogin" class="tooltips" style="color: white"
+                ><i class="fas fa-house-user"></i>
+                <span class="tooltipstext">MyPage</span></a
+              >
+              <!-- <button v-show="isLogin" class="order_online">Mypage</button> -->
             </router-link>
+            <button
+              class="order_online"
+              onclick="location.href='https://www.spotify.com/'"
+            >
+              Share With Friends
+            </button>
           </div>
         </div>
       </nav>
@@ -97,3 +114,32 @@ export default {
   },
 };
 </script>
+<style>
+.tooltips {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltips .tooltipstext {
+  visibility: hidden;
+
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  width: 120px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltips:hover .tooltipstext {
+  visibility: visible;
+}
+</style>
