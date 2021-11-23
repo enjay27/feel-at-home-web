@@ -41,10 +41,24 @@ export default {
       this.sentiment = y;
     },
     goToMusic() {
-      this.$router.replace({
-        name: "Player",
-        params: { q: this.sentiment },
-      });
+      console.log(this.sentiment);
+
+      if (this.sentiment == "green") {
+        this.$router.replace({
+          name: "Player",
+          params: { q: this.sentiment },
+        });
+      } else if (this.sentiment == "red") {
+        this.$router.replace({
+          name: "Player2",
+          params: { q: this.sentiment },
+        });
+      } else if (this.sentiment == "yellow") {
+        this.$router.replace({
+          name: "Player3",
+          params: { q: this.sentiment },
+        });
+      }
     },
   },
 };
