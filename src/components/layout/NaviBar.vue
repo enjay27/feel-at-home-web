@@ -44,18 +44,19 @@
           </ul>
           <div class="user_option">
             <a
+              v-show="!isLogin"
               href="http://localhost:8888/login"
               class="user_link"
               style="cursor: pointer"
             >
               <i class="fa fa-user" aria-hidden="true"></i>
             </a>
-            <form class="form-inline">
-              <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </form>
-            <a href="" class="order_online"> Share With Freinds </a>
+            <button v-show="isLogin" @click="logout()" class="order_online">
+              Logout
+            </button>
+            <router-link :to="{ name: 'Mypage' }" class="nav-link">
+              <button v-show="isLogin" class="order_online">Mypage</button>
+            </router-link>
           </div>
         </div>
       </nav>
@@ -72,15 +73,27 @@
 export default {
   name: "NaviBar",
   data() {
-    return {};
+    return {
+      isLogin: false,
+      user: null,
+    };
   },
   methods: {
-    login() {
-      this.lcation.replace("http://localhost:8888/login");
+    logout() {
+      this.$cookies.remove("user");
+      this.$router.go();
+    },
+    mypage() {
+      this.$router.push({ name: "Mypage" });
     },
   },
   created() {
-    this.$session.set("user", "uuuu");
-  }
+    if (this.$cookies.isKey("user")) {
+      const user = this.$cookies.get("user");
+      this.user = user;
+      this.isLogin = true;
+      console.log(user);
+    }
+  },
 };
 </script>
