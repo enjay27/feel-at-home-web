@@ -5,6 +5,7 @@
     </div>
     <navi-bar />
     <router-view />
+
     <!-- <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> | -->
     <!-- <footer-bar /> -->
   </div>

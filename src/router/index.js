@@ -31,6 +31,7 @@ const routes = [
         path: "calendar",
         name: "Calendar",
         component: Calendar,
+        beforeEnter: requireAuth,
       },
       {
         path: "statics",
@@ -78,10 +79,21 @@ const routes = [
   },
 ];
 
+function requireAuth(to, from, next) {
+  //const { $cookies } = router.app.config.globalProperties;
+  let access_token = Vue.$cookies.get("user");
+  console.log(access_token);
+  if (access_token) {
+    next();
+  } else {
+    alert("Please Login!");
+    next("");
+  }
+}
+
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
 });
-
 export default router;

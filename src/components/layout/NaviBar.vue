@@ -75,7 +75,6 @@
             >
               Share With Friends
             </button>
-
           </div>
         </div>
       </nav>
