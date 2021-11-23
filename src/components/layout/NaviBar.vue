@@ -57,6 +57,7 @@
             <router-link :to="{ name: 'Mypage' }" class="nav-link">
               <button v-show="isLogin" class="order_online">Mypage</button>
             </router-link>
+            <button class="order_online">Share With Friends</button>
           </div>
         </div>
       </nav>
