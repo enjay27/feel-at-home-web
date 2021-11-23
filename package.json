@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 8080",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -51,11 +51,21 @@
       "parser": "babel-eslint"
     },
     "rules": {
-
       "no-console": "off",
-      "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
-
-
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": false
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+            "endOfLine" : "auto"
+        }
+      ]
     }
   },
   "browserslist": [

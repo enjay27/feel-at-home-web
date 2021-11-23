@@ -15,8 +15,8 @@
       @dayclick="onDayClick"
     />
     <br />
-    <p>{{ date }}</p>
-    <p>{{ days }}</p>
+    <!-- <p>{{ date }}</p>
+    <p>{{ days }}</p> -->
     <div class="memo">
       <textarea id="contents" name="contents" v-model="contents"></textarea>
       <button id="memoBtn" @click="registContents()">등록</button>
@@ -89,7 +89,7 @@ export default {
       this.date = day.id;
       console.log("onDayclick :" + day.id);
       console.log("onDayclick :" + day.date);
-
+      this.$emit("showSentiment", "sad");
       // const idx = this.days.findIndex((d) => d.id === day.id);
       // console.log(idx);
       // if (idx >= 0) {
@@ -143,6 +143,7 @@ export default {
               sentiment: sentiment,
             });
           }
+          this.$emit("showSentiment", sentiment);
           this.$emit("showModal", true);
         });
     },

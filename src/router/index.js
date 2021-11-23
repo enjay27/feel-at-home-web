@@ -9,7 +9,7 @@ import VueYoutube from "vue-youtube";
 import Player from "@/components/music/MusicPlayer.vue";
 import Player2 from "@/components/music/MusicPlayer copy.vue";
 import Player3 from "@/components/music/MusicPlayer copy 2.vue";
-
+import About from "@/views/About.vue";
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
 
@@ -63,10 +63,11 @@ const routes = [
   {
     path: "/about",
     name: "About",
+    component: About,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    //component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
 ];
 
