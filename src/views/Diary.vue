@@ -6,7 +6,7 @@
     <div class="heading_container heading_center">
       <h2>Diary</h2>
     </div>
-    <router-view @showModal="onShowModal" @sentiment="onShowSentiment"></router-view>
+    <router-view @showModal="onShowModal"></router-view>
     <br />
     <br />
     <br />
@@ -35,12 +35,10 @@ export default {
     };
   },
   methods: {
-    onShowModal(isShow) {
-      this.showModal = isShow;
-    },
-    onShowSentiment(sentiment) {
-      console.log(sentiment);
-      this.sentiment = sentiment;
+    onShowModal({ x, y }) {
+      console.log(x + " " + y);
+      this.showModal = x;
+      this.sentiment = y;
     },
   },
 };

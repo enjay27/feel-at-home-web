@@ -5,7 +5,7 @@ var request = require("request");
 var optionParams = {
   q: "comfortable+relexed music",
   part: "snippet",
-  key: "AIzaSyCZ4fo41DfflV-WKzv5y3Zq6kLGgNqglzM",
+  key: "AIzaSyDlkFwFbKkX7bRRReJ28U2xGjGsyrxBZbY",
   type: "video",
   maxResults: 10,
   regionCode: "KR",

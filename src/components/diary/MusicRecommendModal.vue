@@ -8,13 +8,16 @@
           </div>
 
           <div class="modal-body">
-            <slot name="body"> <img src="../../assets/images/happy.jpeg" /></slot>
+            <slot name="body">
+              <img src="../../assets/images/happy.jpeg" />
+            </slot>
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
               <button class="modal-music-button" @click="goToMusic()">
-                <i class="fas fa-music"></i>&ensp; Go To Music&ensp; <i class="fas fa-music"></i>
+                <i class="fas fa-music"></i>&ensp; Go To Music&ensp;
+                <i class="fas fa-music"></i>
               </button>
               <button class="modal-default-button" @click="$emit('close')">
                 <i class="far fa-window-close"></i>&ensp;Not Yet
@@ -28,7 +31,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goToMusic() {
+      this.router.push("player");
+    },
+  },
+};
 </script>
 
 <style>
