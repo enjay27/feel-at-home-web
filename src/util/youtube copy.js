@@ -3,7 +3,7 @@
 var arr = [];
 var request = require("request");
 var optionParams = {
-  q: "pleasure music",
+  q: "depressed music",
   part: "snippet",
   key: "AIzaSyCZ4fo41DfflV-WKzv5y3Zq6kLGgNqglzM",
   type: "video",

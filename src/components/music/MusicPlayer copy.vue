@@ -1,5 +1,5 @@
 <template>
-  <div class="player">
+  <div class="player2">
     <youtube :video-id="videoId" ref="youtube" @playing="playing" />
     <!--<button @click="playVideo">play</button>
     <button @click="pauseVideo">pause</button> -->
@@ -10,10 +10,10 @@
 <script>
 //https://developers.google.com/youtube/iframe_api_reference
 
-import test from "@/util/youtube.js";
+import test from "@/util/youtube copy.js";
 
 export default {
-  name: "player",
+  name: "player2",
   //TQtsnpgyp6E
   data() {
     var index = Math.floor(Math.random() * 10);
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     player() {
-      return this.$refs.youtube.player;
+      return this.$refs.youtube.player2;
     },
   },
   created() {

@@ -7,6 +7,8 @@ import Calendar from "@/components/diary/Calendar.vue";
 import Statics from "@/components/diary/Statics.vue";
 import VueYoutube from "vue-youtube";
 import Player from "@/components/music/MusicPlayer.vue";
+import Player2 from "@/components/music/MusicPlayer copy.vue";
+import Player3 from "@/components/music/MusicPlayer copy 2.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
@@ -49,7 +51,12 @@ const routes = [
       {
         path: "player2",
         name: "Player2",
-        component: Player,
+        component: Player2,
+      },
+      {
+        path: "player3",
+        name: "Player3",
+        component: Player3,
       },
     ],
   },
