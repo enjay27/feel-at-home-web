@@ -3,12 +3,13 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Diary from "@/views/Diary.vue";
 import Music from "@/views/Music.vue";
-import Calendar from "@/components/diary/calendar.vue";
+import Calendar from "@/components/diary/Calendar.vue";
 import Statics from "@/components/diary/Statics.vue";
 import VueYoutube from "vue-youtube";
 import Player from "@/components/music/MusicPlayer.vue";
 import Player2 from "@/components/music/MusicPlayer copy.vue";
 import Player3 from "@/components/music/MusicPlayer copy 2.vue";
+import Mypage from "@/views/Mypage.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
@@ -59,6 +60,11 @@ const routes = [
         component: Player3,
       },
     ],
+  },
+  {
+    path: "/mypage",
+    name: "Mypage",
+    component: Mypage,
   },
   {
     path: "/about",
