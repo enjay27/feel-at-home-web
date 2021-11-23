@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Diary from "@/views/Diary.vue";
 import Music from "@/views/Music.vue";
-import Calendar from "@/components/diary/calendar.vue";
+import Calendar from "@/components/diary/Calendar.vue";
 import Statics from "@/components/diary/Statics.vue";
 import VueYoutube from "vue-youtube";
 import Player from "@/components/music/MusicPlayer.vue";
@@ -52,6 +52,11 @@ const routes = [
         component: Player,
       },
     ],
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
   {
     path: "/about",

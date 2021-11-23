@@ -5,7 +5,7 @@
       <nav class="navbar navbar-expand-lg custom_nav-container">
         <router-link to="/" class="navbar-brand">
           <span> Feel at Home</span>
-        </router-link> 
+        </router-link>
 
         <button
           class="navbar-toggler"
@@ -22,20 +22,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item active">
-              <router-link :to="{ name: 'Home' }" class="nav-link"> Home</router-link>
+              <router-link :to="{ name: 'Home' }" class="nav-link">
+                Home</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'Music' }" class="nav-link"> Music</router-link>
+              <router-link :to="{ name: 'Music' }" class="nav-link">
+                Music</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'Diary' }" class="nav-link"> Diary</router-link>
+              <router-link :to="{ name: 'Diary' }" class="nav-link">
+                Diary</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'About' }" class="nav-link"> About</router-link>
+              <router-link :to="{ name: 'About' }" class="nav-link">
+                About</router-link
+              >
             </li>
           </ul>
           <div class="user_option">
-            <a href="http://localhost:8888/login" class="user_link">
+            <a
+              href="http://localhost:8888/login"
+              class="user_link"
+              style="cursor: pointer"
+            >
               <i class="fa fa-user" aria-hidden="true"></i>
             </a>
             <form class="form-inline">
@@ -56,3 +68,19 @@
   color: #42b983;
 }
 </style>
+<script>
+export default {
+  name: "NaviBar",
+  data() {
+    return {};
+  },
+  methods: {
+    login() {
+      this.lcation.replace("http://localhost:8888/login");
+    },
+  },
+  created() {
+    this.$session.set("user", "uuuu");
+  }
+};
+</script>
