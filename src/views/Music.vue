@@ -1,20 +1,20 @@
 <template>
   <div class="music">
     <div class="category">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item active">
+      <ul class="link ul">
+        <li class="nav-item">
           <router-link :to="{ name: 'Player', params: { q: 'pleasure' } }" class="nav-link">
-            Pleasure</router-link
+            Happy</router-link
           >
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'Player2', params: { q: 'depressed' } }" class="nav-link">
-            Depressed</router-link
+            Sad</router-link
           >
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'Player3', params: { q: 'stirring' } }" class="nav-link">
-            Stirring</router-link
+            Soso</router-link
           >
         </li>
       </ul>
@@ -39,22 +39,21 @@ export default {
 .music {
   z-index: 5;
 }
-.ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.li {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 0;
-  float: left;
-}
 .category {
   position: absolute;
   left: 50%;
+  top: 15%;
+  transform: translate(-50%, -15%);
 }
-
+.category > ul li {
+  float: left;
+}
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: #ffbe33;
+}
 .player {
   z-index: 5;
   position: absolute;
