@@ -123,11 +123,12 @@ export default {
 
           let msg = this.date + "\n";
           var sentiment = data.sentences[0].sentiment.score;
+          var sentimentColor;
           if (sentiment > 0) {
             alert(msg + "Happy");
-            sentiment = "green";
+            sentimentColor = "green";
           } else {
-            sentiment = "red";
+            sentimentColor = "red";
             alert(msg + "Sad");
           }
 
@@ -140,7 +141,7 @@ export default {
             this.days.push({
               id: this.getFormatDate(this.date),
               date: this.date,
-              sentiment: sentiment,
+              sentiment: sentimentColor,
             });
           }
           this.$emit("showModal", { x: true, y: sentiment });

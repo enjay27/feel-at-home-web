@@ -12,8 +12,10 @@
                 <div class="detail-box">
                   <h1>Feel at Home</h1>
                   <p>
-                    사용자가 자신의 감정을 표현할 때 그 감정을 더 값지고 행복하게 만들어줄 수 있는
-                    노래를 추천해드립니다 편안히 그리고 행복하게 집에서 자신의 감정을 느껴보세요.
+                    사용자가 자신의 감정을 표현할 때 그 감정을 더 값지고
+                    행복하게 만들어줄 수 있는 행복하게 만들어줄 수 있는 노래를
+                    추천해드립니다 편안히 그리고 행복하게 집에서 자신의 감정을
+                    느껴보세요.
                   </p>
                   <div class="btn-box">
                     <router-link :to="{ name: 'Diary' }" class="btn1">
@@ -31,14 +33,13 @@
             <div class="row">
               <div class="col-md-7 col-lg-6">
                 <div class="detail-box">
-                  <h1>Fast Food Restaurant</h1>
-                  <p>
-                    Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                    mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
-                    sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                  </p>
+                  <h1>Step 1</h1>
+                  <p>오늘 당신의 기분은 어땠나요? 자신의 감정을 기록해보세요</p>
                   <div class="btn-box">
-                    <a href="" class="btn1"> Order Now </a>
+                    <router-link :to="{ name: 'Diary' }" class="btn1">
+                      Discover Your Feeling</router-link
+                    >
+                    <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
                   </div>
                 </div>
               </div>
@@ -50,14 +51,17 @@
             <div class="row">
               <div class="col-md-7 col-lg-6">
                 <div class="detail-box">
-                  <h1>Fast Food Restaurant</h1>
+                  <h1>Step 2</h1>
                   <p>
-                    Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                    mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
-                    sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    감정과 음악의 조우! <br />당신의 감정이 더 행복해지도록,
+                    풍부해지도록, 편안해지도록 우리는 돕고 싶어요. 우리의 추천
+                    음악을 들어볼래요?
                   </p>
                   <div class="btn-box">
-                    <a href="" class="btn1"> Order Now </a>
+                    <router-link :to="{ name: 'Music' }" class="btn1">
+                      Discover Your Feeling</router-link
+                    >
+                    <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
                   </div>
                 </div>
               </div>
@@ -67,7 +71,11 @@
       </div>
       <div class="container">
         <ol class="carousel-indicators">
-          <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+          <li
+            data-target="#customCarousel1"
+            data-slide-to="0"
+            class="active"
+          ></li>
           <li data-target="#customCarousel1" data-slide-to="1"></li>
           <li data-target="#customCarousel1" data-slide-to="2"></li>
         </ol>
