@@ -113,13 +113,9 @@ export default {
     },
     registContents() {
       axios
-        .post(
-          "https://language.googleapis.com/v1/documents:analyzeSentiment?key=" +
-            key.KEY,
-          {
-            document: { type: "PLAIN_TEXT", content: this.contents },
-          }
-        )
+        .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
+          document: { type: "PLAIN_TEXT", content: this.contents },
+        })
         .then(({ data }) => {
           //alert(data);
           console.log(data);
