@@ -3,7 +3,7 @@
 var arr = [];
 var request = require("request");
 var optionParams = {
-  q: "stirring music",
+  q: "comfortable+relexed music",
   part: "snippet",
   key: "AIzaSyCZ4fo41DfflV-WKzv5y3Zq6kLGgNqglzM",
   type: "video",
@@ -30,7 +30,7 @@ request(url, function (err, res, body) {
   var data = JSON.parse(body).items;
   for (var content in data) {
     //youtube downloader에 videoId 넘기면 됨.
-    //console.log(data[content].snippet.title + " : " + data[content].id.videoId);
+    console.log(data[content].snippet.title + " : " + data[content].id.videoId);
     arr[content] = data[content].id.videoId;
   }
 });
