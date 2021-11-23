@@ -15,7 +15,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-music-button" @click="goToMusic()">
+              <button class="modal-music-button" @click="$emit('go')">
                 <i class="fas fa-music"></i>&ensp; Go To Music&ensp;
                 <i class="fas fa-music"></i>
               </button>
@@ -31,13 +31,7 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    goToMusic() {
-      this.router.push("player");
-    },
-  },
-};
+export default {};
 </script>
 
 <style>

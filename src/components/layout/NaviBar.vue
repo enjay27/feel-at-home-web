@@ -68,12 +68,14 @@
               >
               <!-- <button v-show="isLogin" class="order_online">Mypage</button> -->
             </router-link>
+
             <button
               class="order_online"
               onclick="location.href='https://www.spotify.com/'"
             >
               Share With Friends
             </button>
+
           </div>
         </div>
       </nav>

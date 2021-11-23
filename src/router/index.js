@@ -46,17 +46,17 @@ const routes = [
     props: true,
     children: [
       {
-        path: "player",
+        path: "player/:q",
         name: "Player",
         component: Player,
       },
       {
-        path: "player2",
+        path: "player2/:q",
         name: "Player2",
         component: Player2,
       },
       {
-        path: "player3",
+        path: "player3/:q",
         name: "Player3",
         component: Player3,
       },

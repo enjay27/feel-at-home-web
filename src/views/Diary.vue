@@ -10,7 +10,7 @@
     <br />
     <br />
     <br />
-    <Modal v-if="showModal" @close="showModal = false">
+    <Modal v-if="showModal" @close="showModal = false" @go="goToMusic">
       <h3 slot="header">
         Discover your Feeling
         <font color="#ff0000">{{ sentiment }}</font> at Home
@@ -39,6 +39,26 @@ export default {
       console.log(x + " " + y);
       this.showModal = x;
       this.sentiment = y;
+    },
+    goToMusic() {
+      console.log(this.sentiment);
+
+      if (this.sentiment == "green") {
+        this.$router.replace({
+          name: "Player",
+          params: { q: this.sentiment },
+        });
+      } else if (this.sentiment == "red") {
+        this.$router.replace({
+          name: "Player2",
+          params: { q: this.sentiment },
+        });
+      } else if (this.sentiment == "yellow") {
+        this.$router.replace({
+          name: "Player3",
+          params: { q: this.sentiment },
+        });
+      }
     },
   },
 };
