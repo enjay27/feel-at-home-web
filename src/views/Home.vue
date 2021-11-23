@@ -16,7 +16,10 @@
                     노래를 추천해드립니다 편안히 그리고 행복하게 집에서 자신의 감정을 느껴보세요.
                   </p>
                   <div class="btn-box">
-                    <a href="" class="btn1"> Go Home </a>
+                    <router-link :to="{ name: 'Diary' }" class="btn1">
+                      Discover Your Feeling</router-link
+                    >
+                    <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
                   </div>
                 </div>
               </div>
