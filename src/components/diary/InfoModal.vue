@@ -3,6 +3,9 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <button class="modal-default-button" @click="$emit('close')">
+            <i style="color: #505352" class="far fa-times-circle fa-2x"></i>
+          </button>
           <div class="modal-header">
             <slot name="header"> default header </slot>
           </div>
@@ -12,15 +15,7 @@
           </div>
 
           <div class="modal-footer">
-            <slot name="footer">
-              <button class="modal-music-button" @click="$emit('go')">
-                <i class="fas fa-music"></i>&ensp; Go To Music&ensp;
-                <i class="fas fa-music"></i>
-              </button>
-              <button class="modal-default-button" @click="$emit('close')">
-                <i class="far fa-window-close"></i>&ensp;Not Yet
-              </button>
-            </slot>
+            <slot name="footer"> </slot>
           </div>
         </div>
       </div>
@@ -75,10 +70,13 @@ export default {};
 
 .modal-body {
   margin: 20px 0;
+  text-align: center;
 }
 
 .modal-default-button {
   float: right;
+  background-color: transparent;
+  border: 0;
 }
 .modal-enter {
   opacity: 0;
@@ -96,5 +94,7 @@ export default {};
 .modal-body,
 .modal {
   color: #666 !important;
+  font-family: "Nanumsquare", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
 }
 </style>
