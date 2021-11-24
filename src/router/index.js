@@ -4,7 +4,7 @@ import Home from "@/views/Home.vue";
 import Diary from "@/views/Diary.vue";
 import Music from "@/views/Music.vue";
 import Calendar from "@/components/diary/Calendar.vue";
-import Statics from "@/components/diary/Statics.vue";
+import Statics from "@/views/Statics.vue";
 import VueYoutube from "vue-youtube";
 import Player from "@/components/music/MusicPlayer.vue";
 import Player2 from "@/components/music/MusicPlayer copy.vue";
