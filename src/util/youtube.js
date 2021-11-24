@@ -1,11 +1,12 @@
 //YOUTUBE DATA API v3. Search
 //help for params : https://developers.google.com/youtube/v3/docs/search/list#--
-var arr = [];
+var arrID = [];
+var arrTitle = [];
 var request = require("request");
 var optionParams = {
   q: "happy+joyful music",
   part: "snippet",
-  key: "AIzaSyDlkFwFbKkX7bRRReJ28U2xGjGsyrxBZbY",
+  key: "AIzaSyCZ4fo41DfflV-WKzv5y3Zq6kLGgNqglzM",
   type: "video",
   maxResults: 10,
   regionCode: "KR",
@@ -31,10 +32,11 @@ request(url, function (err, res, body) {
   for (var content in data) {
     //youtube downloader에 videoId 넘기면 됨.
     console.log(data[content].snippet.title + " : " + data[content].id.videoId);
-    arr[content] = data[content].id.videoId;
+    arrID[content] = data[content].id.videoId;
+    arrTitle[content] = data[content].snippet.title;
   }
 });
 
-const test = { arr, optionParams };
+const test = { arrID, arrTitle, optionParams };
 
 export default test;
