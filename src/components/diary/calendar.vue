@@ -5,7 +5,7 @@
       <button id="diaryChartBtn" @click="onShowModal">
         <i class="fas fa-info-circle"></i>
       </button>
-      <button id="diaryChartBtn" @click="goStatics()">
+      <button id="diaryChartBtn" @click="moveStatics()">
         <i class="far fa-chart-bar"></i>
       </button>
     </div>
@@ -16,6 +16,7 @@
       :min-date="new Date()"
       :select-attribute="selectAttribute"
       is-expanded
+      value=""
       @dayclick="onDayClick"
     />
     <br />
@@ -23,7 +24,7 @@
     <p>{{ days }}</p> -->
     <div class="memo">
       <textarea id="contents" name="contents" v-model="contents"></textarea>
-      <button id="memoBtn" @click="registContents()">등록</button>
+      <button id="memoBtn" @click="registContent()">등록</button>
       <!-- <button @click="registComment">등록</button> -->
     </div>
 
@@ -53,7 +54,7 @@
 
 <script>
 /* eslint-disable */
-import vCalendar from "v-calendar/lib/components/date-picker.common";
+import vCalendar from "v-calendar/lib/components/date-picker.umd";
 import http from "@/util/http-common";
 import key from "@/util/key";
 import axios from "axios";
@@ -74,6 +75,10 @@ export default {
         dot: true,
       },
       showModal: false,
+
+      sentimentColor: "",
+      sentimentName: "",
+
     };
   },
 
@@ -96,77 +101,107 @@ export default {
       }));
     },
   },
+  mounted() {
+    this.createToday();
+  },
   methods: {
+    /**
+     * Highlighting on Today
+     * Push data {this.days}
+     */
     createToday() {
       this.days.push({
         id: this.getFormatDate(new Date()),
         date: new Date(),
-        sentiment: "grey",
+        sentimentColor: "gray",
+        sentimentName : "How are You Feeling Today?"
       });
     },
+    /**
+     * Triggers when click the date
+     */
     onDayClick(day) {
       this.date = day.id;
       console.log("onDayclick :" + day.id);
       console.log("onDayclick :" + day.date);
       //this.$emit("showModal", { x: true, y: "Happy" });
-      createDiary();
+      //saveContent();
     },
+    /**
+     * format the date 
+     * @example 2021-11-24
+     * @param {String} date
+     */
     getFormatDate(date) {
+      // If the format is right, return
       if (date.length <= 15) return date;
-      var year = date.getFullYear(); //yyyy
-      var month = 1 + date.getMonth(); //M
-      month = month >= 10 ? month : "0" + month; //month 두자리로 저장
+
+      var year = date.getFullYear(); 
+      var month = 1 + date.getMonth(); 
+      month = month >= 10 ? month : "0" + month; // set the month to two digits.
       var day = date.getDate(); //d
-      day = day >= 10 ? day : "0" + day; //day 두자리로 저장
-      return year + "-" + month + "-" + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+      day = day >= 10 ? day : "0" + day; // set the day to two digits.
+      return year + "-" + month + "-" + day; //format : yyyy-mm-dd
     },
-    registContents() {
-      // 감정분석 API Post
-      axios
+    /**
+     * 1. sentiment Analysis using Google Cloud NLP API
+     */
+    sentimentAnalysis(){
+      console.log("sentimentAnalysis!");
+
+      const response = axios
         .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
           document: { type: "PLAIN_TEXT", content: this.contents },
         })
-        .then(({ data }) => {
-          // 감정과 그에따른 색상 맵핑
-          let msg = this.date + "\n"; // 확인용 메세지
-          let sentiment = data.sentences[0].sentiment.score;
-          let sentimentColor;
-          let sentimentName;
-          if (sentiment > 0.5 ) {
-            sentimentName = "Happy";
-            sentimentColor = "green";
-          } else if (sentiment >= 0) {
-            sentimentColor = "yellow";
-            sentimentName = "Soso";
-          } else {
-            sentimentColor = "red";
-            sentimentName = "Sad";
-          }
-          alert(msg + sentimentName);
-
-          // v-calendar에 이미 들어간 날짜인지 확인 후 push ->DB로 전환시키기
-          const idx = this.days.findIndex((d) => d.id === this.date);
-          console.log(idx);
-          if (idx >= 0) 
-            this.days.splice(idx, 1);
-          
-          this.days.push({
-            id: this.getFormatDate(this.date),
-            date: this.date,
-            sentimentColor: sentimentColor,
-            sentimentName : sentimentName
-          });
-          
-
-          // Modal 창 띄우기
-          this.$emit("showModal", { x: true, y: sentimentName });
-          
-        }).then(()=>{
-
-          createDiary();
-        });
+        .then((data)=>{
+          return data;
+        })
+      console.log(response);
+      return response;
     },
-    createDiary() {
+    /**
+     * 2. Mapping Sentiment Color and Name
+     * @param {promise resultSet} analyzed data.
+     */
+    MapColorAndName(data){
+      console.log("[Success] MapColorAndName")
+
+      let msg = this.date + "\n"; // 확인용 메세지
+      let sentimentScore = data.sentences[0].sentiment.score;
+      if (sentimentScore > 0.5 ) {
+          this.sentimentName = "Happy";
+          this.sentimentColor = "green";
+        } else if (sentiment >= 0) {
+          this.sentimentColor = "yellow";
+          this.sentimentName = "Soso";
+        } else {
+          this.sentimentColor = "red";
+          this.sentimentName = "Sad";
+        }
+        alert(msg + this.sentimentName);
+    },
+    /**
+     * check Data Status and add/remove data
+     * Data : {this.days} 
+     */
+    checkDataStatus(){
+    const idx = this.days.findIndex((d) => d.id === this.date);
+      console.log(idx);
+      if (idx >= 0) 
+        this.days.splice(idx, 1);
+      
+      this.days.push({
+        id: this.getFormatDate(this.date),
+        date: this.date,
+        sentimentColor: this.sentimentColor,
+        sentimentName : this.sentimentName
+      });
+          
+    },
+    /**
+     * save the content to DB
+     */
+    saveContent(){
       http
         .post(`/diary`, {
           diary_id: "1",
@@ -185,18 +220,77 @@ export default {
           alert(msg);
         });
     },
-
+    /**
+     * regist Content Process Function
+     * 1. sentimentAnalysis
+     * 2. process Data
+     * 3. save Data
+     * 4. recommend Music Modal
+     */
+    async registContent(){
+      var data = await this.sentimentAnalysis();
+      //const p = await data.json();
+      console.log("zzzz" , data.data);
+      await this.MapColorAndName(data.data);
+      await this.checkDataStatus();
+      this.$emit("showModal", { x: true, y: this.sentimentName });
+    },
+    /**
+     * Trigger
+     */
     onShowModal(){
       // alert("Click");
       this.showModal = true;
     },
-    goStatics(){
+    /** 
+     * move Statics Route
+     */
+    moveStatics(){
       alert("Click");
       this.$router.push('Statics');
     }
 
   },
 };
+
+// registContentsss() {
+//       // 감정분석 API Post
+//       axios
+//         .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
+//           document: { type: "PLAIN_TEXT", content: this.contents },
+//         })
+//         .then(({ data }) => {
+//           // 감정과 그에따른 색상 맵핑
+          
+
+//           // v-calendar에 이미 들어간 날짜인지 확인 후 push ->DB로 전환시키기
+//           const idx = this.days.findIndex((d) => d.id === this.date);
+//           console.log(idx);
+//           if (idx >= 0) 
+//             this.days.splice(idx, 1);
+          
+//           this.days.push({
+//             id: this.getFormatDate(this.date),
+//             date: this.date,
+//             sentimentColor: sentimentColor,
+//             sentimentName : sentimentName
+//           });
+          
+
+//           // Modal 창 띄우기
+//           /**
+//            * Triggers when click the "Go To Music" Button
+//            * 
+//            * @property {boolean} Modal Component Open
+//            * @property {String} sentimentName
+//            */
+//           this.$emit("showModal", { x: true, y: sentimentName });
+          
+//         }).then(()=>{
+
+//           registerContent();
+//         });
+//     },
 </script>
 <style>
 #cal {

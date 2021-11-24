@@ -86,7 +86,7 @@ function requireAuth(to, from, next) {
   if (access_token) {
     next();
   } else {
-    alert("Please Login!");
+    alert("Please Login First🙏!");
     next("");
   }
 }
