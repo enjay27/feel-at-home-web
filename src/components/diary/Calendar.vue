@@ -20,11 +20,11 @@
       @dayclick="onDayClick"
     />
     <br />
-    <!-- <p>{{ date }}</p>
-    <p>{{ days }}</p> -->
+    <!-- <p>{{ date }}</p> -->
+    <!-- <p>{{ days }}</p> -->
     <div class="memo">
       <textarea id="contents" name="contents" v-model="contents"></textarea>
-      <button id="memoBtn" @click="registContent()">등록</button>
+      <button id="memoBtn" @click="registContent()">register</button>
       <!-- <button @click="registComment">등록</button> -->
     </div>
 
@@ -68,17 +68,20 @@ export default {
   
   data() {
     return {
+      member_id : "",
       date: new Date(),
       days: [],
       contents: "",
       selectAttribute: {
         dot: true,
+        
       },
       showModal: false,
-
       sentimentColor: "",
       sentimentName: "",
-
+      y : "",
+      m : "", 
+      d : "",
     };
   },
 
@@ -102,30 +105,69 @@ export default {
     },
   },
   mounted() {
+    this.getFormatDate(this.date);
     this.createToday();
+    this.getMemberId();
+    this.getDiaryList();
   },
   methods: {
+    /**
+     * regist Content Process Function
+     * 1. sentimentAnalysis
+     * 2. process Data
+     * 3. save Data
+     * 4. recommend Music Modal
+     */
+    async registContent(){
+      //1. sentimentAnalysis
+      var data = await this.sentimentAnalysis();
+      //console.log("zzzz" , data.data);
+      // 2. process Data
+      await this.MapColorAndName(data.data);
+      await this.checkDataStatus();
+      // 3. saveData
+      //await this.saveContent(); 
+      // 4. recommend Music Modal
+      this.$emit("showModal", { x: true, y: this.sentimentName });
+    },
+    /**
+     * getMemberId from Cookie('user')
+     */
+    getMemberId(){
+      console.log("[Start] getMemberId")
+      let access_token = this.$cookies.get("user");
+      //console.log(access_token);
+      console.log('member_id : ',access_token.data.id);
+      this.member_id = access_token.data.id
+      console.log("[End] getMemberId")
+    },
     /**
      * Highlighting on Today
      * Push data {this.days}
      */
     createToday() {
+      console.log("[Start] createToday")
       this.days.push({
         id: this.getFormatDate(new Date()),
         date: new Date(),
         sentimentColor: "gray",
         sentimentName : "How are You Feeling Today?"
       });
+      console.log("[End] createToday")
     },
     /**
      * Triggers when click the date
      */
     onDayClick(day) {
-      this.date = day.id;
+      console.log("[START] onDayClick");
       console.log("onDayclick :" + day.id);
-      console.log("onDayclick :" + day.date);
+      // console.log(day);
+      // this.date = day.id;
+      this.getFormatDate(day.date);
+      //this.getDiaryList();
+      // console.log("onDayclick :" + day.date);
       //this.$emit("showModal", { x: true, y: "Happy" });
-      //saveContent();
+      //this.saveContent();
     },
     /**
      * format the date 
@@ -133,18 +175,24 @@ export default {
      * @param {String} date
      */
     getFormatDate(date) {
+      console.log("[START] getFormatDate");
       // If the format is right, return
       if (date.length <= 15) return date;
 
       var year = date.getFullYear(); 
+      this.y = year;
       var month = 1 + date.getMonth(); 
       month = month >= 10 ? month : "0" + month; // set the month to two digits.
+      this.m = month;
       var day = date.getDate(); //d
       day = day >= 10 ? day : "0" + day; // set the day to two digits.
-      return year + "-" + month + "-" + day; //format : yyyy-mm-dd
+      this.d = day;
+      var formatedDate = year + "-" + month + "-" + day; //format : yyyy-mm-dd
+      this.date = formatedDate;
+      return formatedDate; 
     },
     /**
-     * 1. sentiment Analysis using Google Cloud NLP API
+     * sentiment Analysis using Google Cloud NLP API
      */
     sentimentAnalysis(){
       console.log("sentimentAnalysis!");
@@ -160,7 +208,7 @@ export default {
       return response;
     },
     /**
-     * 2. Mapping Sentiment Color and Name
+     * Mapping Sentiment Color and Name
      * @param {promise resultSet} analyzed data.
      */
     MapColorAndName(data){
@@ -171,7 +219,7 @@ export default {
       if (sentimentScore > 0.5 ) {
           this.sentimentName = "Happy";
           this.sentimentColor = "green";
-        } else if (sentiment >= 0) {
+        } else if (sentimentScore >= 0) {
           this.sentimentColor = "yellow";
           this.sentimentName = "Soso";
         } else {
@@ -185,17 +233,32 @@ export default {
      * Data : {this.days} 
      */
     checkDataStatus(){
+      console.log("[START] checkDataStatus");
+      console.log(this.date);
     const idx = this.days.findIndex((d) => d.id === this.date);
       console.log(idx);
-      if (idx >= 0) 
+      if (idx >= 0) {
         this.days.splice(idx, 1);
       
-      this.days.push({
-        id: this.getFormatDate(this.date),
-        date: this.date,
-        sentimentColor: this.sentimentColor,
-        sentimentName : this.sentimentName
-      });
+      
+        this.days.push({
+          id: this.getFormatDate(this.date),
+          date: this.date,
+          sentimentColor: this.sentimentColor,
+          sentimentName : this.sentimentName
+        });
+      }
+      else{
+        this.days.push({
+          id: this.getFormatDate(this.date),
+          date: this.date,
+          sentimentColor: this.sentimentColor,
+          sentimentName : this.sentimentName
+        });
+        this.saveContent();
+      }
+        
+      
           
     },
     /**
@@ -203,14 +266,14 @@ export default {
      */
     saveContent(){
       http
-        .post(`/diary`, {
-          diary_id: "1",
-          member_id: "1",
-          year: "1",
-          month: "2",
-          day: "3",
-          memo: "hello",
-          sentiment: "Happy",
+        .post("/diary/", {
+          member_id: '12345',
+          year: this.y,
+          month:this.m,
+          day: this.d,
+          memo: this.contents,
+          sentimentColor: this.sentimentColor,
+          sentimentName: this.sentimentName,
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -221,20 +284,28 @@ export default {
         });
     },
     /**
-     * regist Content Process Function
-     * 1. sentimentAnalysis
-     * 2. process Data
-     * 3. save Data
-     * 4. recommend Music Modal
+     * get Diary List from DB
      */
-    async registContent(){
-      var data = await this.sentimentAnalysis();
-      //const p = await data.json();
-      console.log("zzzz" , data.data);
-      await this.MapColorAndName(data.data);
-      await this.checkDataStatus();
-      this.$emit("showModal", { x: true, y: this.sentimentName });
+    getDiaryList(){
+      console.log("[START] getDiaryList");
+      // http.get(`/diary/${this.member_id}`).then(({ data }) => {
+      //   console.log(data);
+      // });
+      http.get(`/diary/${'12345'}`).then(({ data }) => {
+        console.log(data);
+        data.forEach(element => {
+          console.log(element)
+          this.days.push({
+          id: element.year+"-"+element.month+"-"+element.day,
+          date: element.year+"-"+element.month+"-"+element.day,
+          sentimentColor: element.sentimentColor,
+          sentimentName : element.sentimentName
+      
+          });
+        });
+      });
     },
+    
     /**
      * Trigger
      */
@@ -301,8 +372,7 @@ export default {
 
 .memo {
   padding: 3px;
-  border: 1px solid #cbd5e0;
-  border-radius: 7px;
+  
   margin-top: 20px;
   width: 100%;
   height: 100px;
@@ -310,17 +380,26 @@ export default {
   display: flex;
 }
 #contents {
+  padding : 5px;
   width: 85%;
   height: 100%;
   resize: none;
-  border: 0;
+  /* border: 0; */
   outline: 0;
+  border: 1px solid #cbd5e0;
+  border-radius: 7px;
 }
 #memoBtn {
   width: 15%;
-  height: 90%;
-  margin: auto;
+  height: 100%;
+  margin-left: 10px;
   display: block;
+  background-color: #ffbe33;
+  border : 0;
+  border-radius: 7px;
+  color : white;
+  font-size: 20px;
+  font-family: 'Open Sans',sans-serif;
 }
 #up {
   float: right;
