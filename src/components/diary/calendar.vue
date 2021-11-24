@@ -89,7 +89,6 @@ export default {
       return year + "-" + month + "-" + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     },
     registContents() {
-
       // 감정분석 API Post
       axios
         .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
@@ -100,13 +99,13 @@ export default {
           let msg = this.date + "\n"; // 확인용 메세지
           let sentiment = data.sentences[0].sentiment.score;
           let sentimentColor;
-          if (sentiment > 0.5 ) {
+          if (sentiment > 0.5) {
             alert(msg + "Happy");
             sentimentColor = "green";
-          } else if(sentiment >= 0) {
+          } else if (sentiment >= 0) {
             sentimentColor = "yellow";
             alert(msg + "Soso");
-          }else{
+          } else {
             sentimentColor = "red";
             alert(msg + "Sad");
           }
@@ -126,22 +125,21 @@ export default {
 
           // Modal 창 띄우기
           this.$emit("showModal", { x: true, y: sentiment });
-          
-        }).then(()=>{
+        })
+        .then(() => {
           createDiary();
         });
     },
-    createDiary(){
+    createDiary() {
       http
         .post(`/diary`, {
           diary_id: "1",
           member_id: "1",
-          year:"1",
-          month : "2",
-          day:"3",
-          memo : "hello",
-          sentiment : "Happy"
-
+          year: "1",
+          month: "2",
+          day: "3",
+          memo: "hello",
+          sentiment: "Happy",
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -149,9 +147,8 @@ export default {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
-          
         });
-    }
+    },
   },
 };
 </script>
