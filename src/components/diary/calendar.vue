@@ -5,7 +5,7 @@
       <button id="diaryChartBtn" @click="onShowModal">
         <i class="fas fa-info-circle"></i>
       </button>
-      <button id="diaryChartBtn" @click="goStatics">
+      <button id="diaryChartBtn" @click="goStatics()">
         <i class="far fa-chart-bar"></i>
       </button>
     </div>
@@ -192,6 +192,7 @@ export default {
       this.showModal = true;
     },
     goStatics(){
+      alert("Click");
       this.$router.push('Statics');
     }
   },
