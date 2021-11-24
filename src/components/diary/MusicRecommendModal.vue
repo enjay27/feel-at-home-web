@@ -8,9 +8,7 @@
           </div>
 
           <div class="modal-body">
-            <slot name="body">
-              <img src="../../assets/images/happy.jpeg" />
-            </slot>
+            <slot name="body"> </slot>
           </div>
 
           <div class="modal-footer">
@@ -53,7 +51,7 @@ export default {};
 }
 
 .modal-container {
-  width: 600px;
+  width: 800px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -71,7 +69,7 @@ export default {};
 }
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: #505352;
   text-align: center;
 }
 

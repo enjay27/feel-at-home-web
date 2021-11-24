@@ -53,15 +53,4 @@ export default {
 .music {
   z-index: 5;
 }
-.category {
-  position: absolute;
-  left: 50%;
-}
-
-.player {
-  z-index: 5;
-  position: absolute;
-  top: 25%;
-  left: 25%;
-}
 </style>
