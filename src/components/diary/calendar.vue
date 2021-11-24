@@ -2,8 +2,12 @@
   <div id="cal">
     <br />
     <div id="up">
-      [green= happy / red: sad / yellow : soso]
-      <button id="diaryChartBtn"><i class="far fa-chart-bar"></i></button>
+      <button id="diaryChartBtn" @click="onShowModal">
+        <i class="fas fa-info-circle"></i>
+      </button>
+      <button id="diaryChartBtn" @click="goStatics">
+        <i class="far fa-chart-bar"></i>
+      </button>
     </div>
     <br />
 
@@ -22,6 +26,28 @@
       <button id="memoBtn" @click="registContents()">등록</button>
       <!-- <button @click="registComment">등록</button> -->
     </div>
+
+    <InfoModal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">
+        How to Use
+        <!-- <i class="fas fa-times closeModalBtn" @click="showModal = false"></i> -->
+      </h3>
+
+      <p slot="body">
+        1. 날짜를 선택하고 당신의 공간에서 느낀 감정을 기록해주세요. <br />(날짜
+        미선택시, 오늘 날짜에 기록됩니다.)<br /><br />
+        2. 등록 버튼을 눌러주시면 감정의 색깔을 추출해드리겠습니다 <br />
+        <i style="color: #c6f6d5" class="fas fa-circle"></i>초록 : 오늘 기분이
+        행복하셨나요?<br />
+        <i style="color: #feb2b2" class="fas fa-circle"></i>빨강 : 조금
+        슬펐나요? 내일은 더 행복하기에요.<br />
+        <i style="color: #fefcbf" class="fas fa-circle"></i>노랑 : 보통날 또한
+        소중하죠.<br />
+        <br />
+        3. 감정에 따른 음악추천을 받아보세요. 당신의 공간이 더
+        행복해질거에요!<br />
+      </p>
+    </InfoModal>
   </div>
 </template>
 
@@ -31,12 +57,14 @@ import vCalendar from "v-calendar/lib/components/date-picker.common";
 import http from "@/util/http-common";
 import key from "@/util/key";
 import axios from "axios";
-
+import InfoModal from "../diary/InfoModal";
 export default {
   name: "Calendar",
   components: {
     vCalendar,
+    InfoModal,
   },
+  
   data() {
     return {
       date: new Date(),
@@ -45,12 +73,13 @@ export default {
       selectAttribute: {
         dot: true,
       },
+      showModal: false,
     };
   },
 
   computed: {
     dates() {
-      return this.days.map((day) => [day.date, day.sentiment]);
+      return this.days.map((day) => [day.date, day.sentimentColor, day.sentimentName]);
     },
     attributes() {
       return this.dates.map((data) => ({
@@ -58,6 +87,9 @@ export default {
         highlight: {
           color: data[1],
           fillMode: "light",
+        },
+        popover: {
+          label: data[2],
         },
         order: 1,
         dates: data[0],
@@ -100,32 +132,35 @@ export default {
           let msg = this.date + "\n"; // 확인용 메세지
           let sentiment = data.sentences[0].sentiment.score;
           let sentimentColor;
+          let sentimentName;
           if (sentiment > 0.5 ) {
-            alert(msg + "Happy");
+            sentimentName = "Happy";
             sentimentColor = "green";
           } else if(sentiment >= 0) {
             sentimentColor = "yellow";
-            alert(msg + "Soso");
+            sentimentName = "Soso";
           }else{
             sentimentColor = "red";
-            alert(msg + "Sad");
+            sentimentName = "Sad";
           }
+          alert(msg + sentimentName);
 
           // v-calendar에 이미 들어간 날짜인지 확인 후 push ->DB로 전환시키기
           const idx = this.days.findIndex((d) => d.id === this.date);
           console.log(idx);
-          if (idx >= 0) {
+          if (idx >= 0) 
             this.days.splice(idx, 1);
-          } else {
-            this.days.push({
-              id: this.getFormatDate(this.date),
-              date: this.date,
-              sentiment: sentimentColor,
-            });
-          }
+          
+          this.days.push({
+            id: this.getFormatDate(this.date),
+            date: this.date,
+            sentimentColor: sentimentColor,
+            sentimentName : sentimentName
+          });
+          
 
           // Modal 창 띄우기
-          this.$emit("showModal", { x: true, y: sentiment });
+          this.$emit("showModal", { x: true, y: sentimentName });
           
         }).then(()=>{
           createDiary();
@@ -151,6 +186,13 @@ export default {
           alert(msg);
           
         });
+    },
+    onShowModal(){
+      // alert("Click");
+      this.showModal = true;
+    },
+    goStatics(){
+      this.$router.push('Statics');
     }
   },
 };
@@ -193,5 +235,11 @@ export default {
   border: 0;
   outline: 0;
   height: 30px;
+  width: 30px;
+  margin-left : 5px;
+  padding: 0;
+}
+#diaryChartBtn:hover{
+  background-color: #ffbe33;
 }
 </style>
