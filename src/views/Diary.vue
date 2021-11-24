@@ -80,17 +80,17 @@ export default {
       if (this.sentiment == "Happy") {
         this.$router.replace({
           name: "Player",
-          params: { q: this.sentiment },
+          params: { q: "pleasure" },
         });
       } else if (this.sentiment == "Sad") {
         this.$router.replace({
           name: "Player2",
-          params: { q: this.sentiment },
+          params: { q: "depressed" },
         });
       } else if (this.sentiment == "Soso") {
         this.$router.replace({
           name: "Player3",
-          params: { q: this.sentiment },
+          params: { q: "relexed" },
         });
       }
     },
