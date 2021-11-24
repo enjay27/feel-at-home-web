@@ -66,9 +66,10 @@ export default {
       this.showModal = x;
       this.sentiment = y;
 
-      if (this.sentiment > 0.5) {
+      // 기석님 여기 바꿨어요!
+      if (this.sentiment == "Happy") {
         this.image = this.images[0];
-      } else if (this.sentiment < 0) {
+      } else if (this.sentiment == "Sad") {
         this.image = this.images[1];
       } else {
         this.image = this.images[2];
@@ -77,17 +78,17 @@ export default {
     goToMusic() {
       console.log(this.sentiment);
 
-      if (this.sentiment > 0.5) {
+      if (this.sentiment == "Happy") {
         this.$router.replace({
           name: "Player",
           params: { q: "pleasure" },
         });
-      } else if (this.sentiment < 0) {
+      } else if (this.sentiment == "Sad") {
         this.$router.replace({
           name: "Player2",
           params: { q: "depressed" },
         });
-      } else if (this.sentiment >= 0) {
+      } else {
         this.$router.replace({
           name: "Player3",
           params: { q: "relexed" },
