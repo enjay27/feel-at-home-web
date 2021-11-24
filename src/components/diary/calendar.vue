@@ -28,8 +28,7 @@
 <script>
 /* eslint-disable */
 import vCalendar from "v-calendar/lib/components/date-picker.common";
-
-//import http from "@/util/http-common";
+import http from "@/util/http-common";
 import key from "@/util/key";
 import axios from "axios";
 
@@ -77,7 +76,8 @@ export default {
       this.date = day.id;
       console.log("onDayclick :" + day.id);
       console.log("onDayclick :" + day.date);
-      this.$emit("showModal", { x: true, y: "Happy" });
+      //this.$emit("showModal", { x: true, y: "Happy" });
+      createDiary();
     },
     getFormatDate(date) {
       if (date.length <= 15) return date;
@@ -127,8 +127,31 @@ export default {
           // Modal 창 띄우기
           this.$emit("showModal", { x: true, y: sentiment });
           
+        }).then(()=>{
+          createDiary();
         });
     },
+    createDiary(){
+      http
+        .post(`/diary`, {
+          diary_id: "1",
+          member_id: "1",
+          year:"1",
+          month : "2",
+          day:"3",
+          memo : "hello",
+          sentiment : "Happy"
+
+        })
+        .then(({ data }) => {
+          let msg = "등록 처리시 문제가 발생했습니다.";
+          if (data === "success") {
+            msg = "등록이 완료되었습니다.";
+          }
+          alert(msg);
+          
+        });
+    }
   },
 };
 </script>
