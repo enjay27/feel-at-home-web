@@ -13,7 +13,7 @@
           >
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Player3', params: { q: 'stirring' } }" class="nav-link">
+          <router-link :to="{ name: 'Player3', params: { q: 'relexed' } }" class="nav-link">
             Soso</router-link
           >
         </li>
@@ -37,7 +37,9 @@ export default {
 
 <style>
 .music {
+  background-color: white;
   z-index: 5;
+  height: 700px;
 }
 .category {
   position: absolute;
@@ -46,10 +48,11 @@ export default {
   transform: translate(-50%, -15%);
 }
 .category > ul li {
+  list-style: none;
   float: left;
 }
 .nav-link {
-  color: white;
+  color: Black;
 }
 .nav-link:hover {
   color: #ffbe33;

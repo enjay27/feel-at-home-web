@@ -43,20 +43,20 @@ export default {
     goToMusic() {
       console.log(this.sentiment);
 
-      if (this.sentiment == "happy") {
+      if (this.sentiment > 0) {
         this.$router.replace({
           name: "Player",
-          params: { q: this.sentiment },
+          params: { q: "pleasure" },
         });
-      } else if (this.sentiment == "sad") {
+      } else if (this.sentiment < 0) {
         this.$router.replace({
           name: "Player2",
-          params: { q: this.sentiment },
+          params: { q: "depressed" },
         });
-      } else if (this.sentiment == "soso") {
+      } else if (this.sentiment == 0) {
         this.$router.replace({
           name: "Player3",
-          params: { q: this.sentiment },
+          params: { q: "relexed" },
         });
       }
     },
