@@ -46,18 +46,6 @@ export default {
       selectAttribute: {
         dot: true,
       },
-      // attributes: [
-      //   {
-      //     key: "today",
-      //     highlight: {
-      //       color: "purple",
-      //       fillMode: "solid",
-      //       contentClass: "italic",
-      //     },
-      //     dates: new Date(),
-      //     order: 0,
-      //   },
-      // ],
     };
   },
 
@@ -89,18 +77,7 @@ export default {
       this.date = day.id;
       console.log("onDayclick :" + day.id);
       console.log("onDayclick :" + day.date);
-      //this.$emit("showModal", { x: true, y: "Happy" });
-      // const idx = this.days.findIndex((d) => d.id === day.id);
-      // console.log(idx);
-      // if (idx >= 0) {
-      //   this.days.splice(idx, 1);
-      // } else {
-      //   this.days.push({
-      //     id: day.id,
-      //     date: day.date,
-      //     sentiment: "happy",
-      //   });
-      // }
+      this.$emit("showModal", { x: true, y: "Happy" });
     },
     getFormatDate(date) {
       if (date.length <= 15) return date;
@@ -112,27 +89,29 @@ export default {
       return year + "-" + month + "-" + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     },
     registContents() {
+
+      // 감정분석 API Post
       axios
         .post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + key.KEY, {
           document: { type: "PLAIN_TEXT", content: this.contents },
         })
         .then(({ data }) => {
-          //alert(data);
-          console.log(data);
-          console.log(data.sentences[0].sentiment.score);
-
-          let msg = this.date + "\n";
-          var sentiment = data.sentences[0].sentiment.score;
-          var sentimentColor;
-          if (sentiment > 0) {
+          // 감정과 그에따른 색상 맵핑
+          let msg = this.date + "\n"; // 확인용 메세지
+          let sentiment = data.sentences[0].sentiment.score;
+          let sentimentColor;
+          if (sentiment > 0.5 ) {
             alert(msg + "Happy");
             sentimentColor = "green";
-          } else {
+          } else if(sentiment >= 0) {
+            sentimentColor = "yellow";
+            alert(msg + "Soso");
+          }else{
             sentimentColor = "red";
             alert(msg + "Sad");
           }
 
-          console.log(this.date);
+          // v-calendar에 이미 들어간 날짜인지 확인 후 push ->DB로 전환시키기
           const idx = this.days.findIndex((d) => d.id === this.date);
           console.log(idx);
           if (idx >= 0) {
@@ -144,9 +123,10 @@ export default {
               sentiment: sentimentColor,
             });
           }
+
+          // Modal 창 띄우기
           this.$emit("showModal", { x: true, y: sentiment });
-          // this.$emit("showSentiment", sentiment);
-          // this.$emit("showModal", true);
+          
         });
     },
   },
