@@ -27,11 +27,19 @@
             </dl>
           </div>
         </div>
-        <div class="btn-box">
-          <router-link :to="{ name: 'Likelist' }" class="btn1">
-            Go to Likelist</router-link
-          >
-          <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
+        <div class="listDiv">
+          <div class="btn-box">
+            <router-link :to="{ name: 'Likelist' }" class="btn1">
+              Go to Likelist</router-link
+            >
+            <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
+          </div>
+          <div class="btn-box">
+            <router-link :to="{ name: 'Statics' }" class="btn1">
+              Go to EmotionChart</router-link
+            >
+            <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
+          </div>
         </div>
       </div>
     </div>
@@ -69,5 +77,11 @@ export default {
 <style>
 h1 {
   border: white;
+}
+.listDiv {
+  display: flex;
+}
+.btn-box {
+  margin-right: 10px;
 }
 </style>

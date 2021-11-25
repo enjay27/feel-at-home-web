@@ -107,6 +107,7 @@ export default {
 .diary {
   background-color: white;
   z-index: 5;
+  height: 800px;
 }
 h2 {
   padding-bottom: 5px;
