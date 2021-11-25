@@ -7,8 +7,52 @@
         <div class="col-md-6">
           <div class="card" v-for="(item, index) in users" :key="index">
             <div class="card-body">
-              <h4 class="card-title">{{ item.display_name }}</h4>
-              <p class="card-text">{{ item.email }}</p>
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-md-6">
+                    {{ item.display_name }}
+                  </div>
+                  <!-- <div class="col-md-2">
+                    <b-button
+                      block
+                      v-show="!item.follow"
+                      style="cursor: pointer"
+                      @click="follow(index)"
+                      class="btn btn-outline-warning"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'Likelist',
+                          params: { member_id: item.member_id },
+                        }"
+                      >
+                        Likelist</router-link
+                      >
+                    </b-button>
+                  </div>
+                  <div class="col-md-3">
+                    <b-button
+                      block
+                      v-show="!item.follow"
+                      style="cursor: pointer"
+                      @click="follow(index)"
+                      class="btn btn-outline-info"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'Statics',
+                          params: { member_id: item.member_id },
+                        }"
+                      >
+                        EmotionChart</router-link
+                      >
+                    </b-button>
+                  </div> -->
+                </div>
+              </h4>
+              <p class="card-text">
+                {{ item.email }}
+              </p>
               <a
                 v-show="!item.follow"
                 style="cursor: pointer"
@@ -81,5 +125,9 @@ export default {
 #follower {
   background-color: white;
   z-index: 10;
+}
+
+#title {
+  color: black;
 }
 </style>

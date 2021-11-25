@@ -62,6 +62,7 @@ h1 {
 .likelist {
   background-color: white;
   z-index: 5;
+  height: 800px;
 }
 .list-body {
   display: flex;
