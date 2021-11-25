@@ -2,6 +2,11 @@
   <div id="follow">
     <br />
     <br />
+    <div class="heading_container heading_center">
+      <h2 id="h2c">Share With Friends</h2>
+    </div>
+    <br />
+    <br />
     <div class="container">
       <div id="stat" class="row">
         <div class="col-md-4">
@@ -101,8 +106,14 @@ h2 {
 #follow {
   background-color: white;
   z-index: 5;
+  height: 800px;
 }
 #stat {
   margin: 0 auto;
+}
+#h2c {
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
+  font-family: "Dancing Script";
 }
 </style>
