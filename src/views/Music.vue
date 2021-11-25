@@ -58,12 +58,14 @@ export default {
 #musicPlayerDiv {
   height: 100%;
   width: 100%;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .musicDiv {
   display: block;
+  background-color: white;
 }
 .category_ul {
   margin: 0;
@@ -72,7 +74,7 @@ export default {
 .music {
   background-color: white;
   z-index: 5;
-  height: 700px;
+  height: 800px;
 }
 .category {
   /* position: absolute;
