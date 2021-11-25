@@ -11,7 +11,7 @@ var request = require("request");
 var optionParams = {
   q: "happy+joyful music",
   part: "snippet",
-  key: "AIzaSyDRB0oeLZ7nmp0IDdtBbpqUrEvThQGHg1M",
+  key: "AIzaSyDlkFwFbKkX7bRRReJ28U2xGjGsyrxBZbY",
   type: "video",
   maxResults: 3,
   regionCode: "KR",
@@ -67,7 +67,7 @@ request(url, function (err, res, body) {
     .post("http://localhost:8077/music/recommend", musics)
     .then((response) => {
       localStorage.music = JSON.stringify(response.data);
-      console.log(response);
+      console.log(response.data);
     });
   // axios
   //   .post("http://localhost:8077/music/recommend", musics)
