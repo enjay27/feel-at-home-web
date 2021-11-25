@@ -21,7 +21,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <router-link :to="{ name: 'Home' }" class="nav-link">
                 Home</router-link
               >

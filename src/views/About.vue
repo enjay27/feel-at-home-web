@@ -59,58 +59,51 @@
     </div>
     <div class="timeline">
       <div class="container left">
-        <div class="date">15 Dec</div>
-        <i class="icon fa fa-home"></i>
+        <!-- <div class="date">15 Dec</div> -->
+        <!-- <i class="icon fa fa-home"></i> -->
+        <i class="icon fas fa-heart"></i>
         <div class="content">
-          <h2>Lorem ipsum dolor sit amet</h2>
-          <p>
-            Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat
-            sagittis non. Ut blandit semper pretium.
-          </p>
+          <h2>감정분석</h2>
+          <p>텍스트에서 구글 자연어 분석 API를 사용하여 감정을 분석합니다.</p>
         </div>
       </div>
       <div class="container right">
-        <div class="date">22 Oct</div>
-        <i class="icon fa fa-gift"></i>
+        <!-- <div class="date">22 Oct</div> -->
+        <i class="icon fas fa-heart"></i>
+        <!-- <i class="icon fa fa-gift"></i> -->
         <div class="content">
-          <h2>Lorem ipsum dolor sit amet</h2>
+          <h2>감정 캘린더 & 감정 차트</h2>
           <p>
-            Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat
-            sagittis non. Ut blandit semper pretium.
+            감정에 따라 캘린더에 다른 색상으로 감정을 표현합니다. <br />
+            월별로 감정을 차트화해서 표시합니다.
           </p>
         </div>
       </div>
       <div class="container left">
-        <div class="date">10 Jul</div>
-        <i class="icon fa fa-user"></i>
+        <i class="icon fas fa-heart"></i>
         <div class="content">
-          <h2>Lorem ipsum dolor sit amet</h2>
+          <h2>감정에 따른 음악추천</h2>
           <p>
-            Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat
-            sagittis non. Ut blandit semper pretium.
+            앞서 분석된 감정에 따른 음악을 추천해줍니다. 추천된 음악은 당신의
+            감정을 더 풍부하게 만들어줄 것입니다. <br />
+            카테고리를 눌러서 음악을 추천받을 수돈 있습니다.
           </p>
         </div>
       </div>
       <div class="container right">
-        <div class="date">18 May</div>
-        <i class="icon fa fa-running"></i>
+        <i class="icon fas fa-heart"></i>
+        <!-- <i class="icon fa fa-running"></i> -->
         <div class="content">
-          <h2>Lorem ipsum dolor sit amet</h2>
-          <p>
-            Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat
-            sagittis non. Ut blandit semper pretium.
-          </p>
+          <h2>친구와의 공유</h2>
+          <p>친구와 팔로우를 맺어보세요. 친구와 감정과 음악을 교류해보세요.</p>
         </div>
       </div>
       <div class="container left">
-        <div class="date">10 Feb</div>
-        <i class="icon fa fa-cog"></i>
+        <i class="icon fas fa-heart"></i>
+        <!-- <i class="icon fa fa-cog"></i> -->
         <div class="content">
-          <h2>Lorem ipsum dolor sit amet</h2>
-          <p>
-            Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat
-            sagittis non. Ut blandit semper pretium.
-          </p>
+          <h2>당신의 HappyHouse를 찾으셨나요?</h2>
+          <p>Feel At Home이 당신의 HappyHouse를 찾는데 도움이 되길 바랍니다.</p>
         </div>
       </div>
     </div>
@@ -136,6 +129,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+h2 {
+  font-family: "nanumsquare";
 }
 .white {
   color: white;
