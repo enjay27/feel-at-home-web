@@ -26,6 +26,16 @@
               <dd>{{ user.country }}</dd>
             </dl>
           </div>
+          <div class="list-body">
+            <table>
+              <tr>
+                <th>Title</th>
+              </tr>
+              <tr v-for="item in items" :key="item.title">
+                <td><span v-html="item.title"></span></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -33,17 +43,29 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "mypage",
   data() {
+    this.user = this.$cookies.get("user").data;
+
     return {
       user: null,
       access_token: null,
+      items: null,
     };
   },
   mounted() {
     this.user = this.$cookies.get("user").data;
     this.access_token = this.$cookies.get("user").access_token;
+    axios
+      .get(`http://localhost:8077/user/likelist/${this.user.member_id}`)
+      .then((response) => {
+        console.log(this.user.member_id);
+        console.log(response.data);
+        this.items = response.data;
+      });
   },
 };
 </script>

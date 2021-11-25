@@ -9,7 +9,7 @@ var request = require("request");
 var optionParams = {
   q: "sad+lonely+gloomy music",
   part: "snippet",
-  key: "AIzaSyDRB0oeLZ7nmp0IDdtBbpqUrEvThQGHg1M",
+  key: "AIzaSyDlkFwFbKkX7bRRReJ28U2xGjGsyrxBZbY",
   type: "video",
   maxResults: 3,
   regionCode: "KR",
