@@ -137,8 +137,8 @@ export default {
       console.log("[Start] getMemberId")
       let access_token = this.$cookies.get("user");
       //console.log(access_token);
-      console.log('member_id : ',access_token.data.id);
-      this.member_id = access_token.data.id
+      console.log('member_id : ',access_token.data.member_id);
+      this.member_id = access_token.data.member_id;
       console.log("[End] getMemberId")
     },
     /**
@@ -247,6 +247,7 @@ export default {
           sentimentColor: this.sentimentColor,
           sentimentName : this.sentimentName
         });
+        this.saveContent();
       }
       else{
         this.days.push({
@@ -267,7 +268,7 @@ export default {
     saveContent(){
       http
         .post("/diary/", {
-          member_id: '12345',
+          member_id: this.member_id,
           year: this.y,
           month:this.m,
           day: this.d,
@@ -281,6 +282,8 @@ export default {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
+        }).then(()=>{
+          this.getCharData();
         });
     },
     /**
@@ -291,7 +294,7 @@ export default {
       // http.get(`/diary/${this.member_id}`).then(({ data }) => {
       //   console.log(data);
       // });
-      http.get(`/diary/${'12345'}`).then(({ data }) => {
+      http.get(`/diary/${this.member_id}`).then(({ data }) => {
         console.log(data);
         data.forEach(element => {
           console.log(element)
@@ -303,9 +306,38 @@ export default {
       
           });
         });
+      }).then(()=>{
+        this.getCharData();
       });
     },
-    
+    getCharData() {
+      console.log("[START] getCharData");
+      
+      http.get(`/diary/sent/${this.member_id}`).then(({ data }) => {
+        console.log(data);
+        data.forEach((element) => {
+          console.log(element);
+          //console.log(this.chartData.datasets[0].data);
+          if (element.sentimentName == "Happy") {
+            this.$cookies.set('Happy', element.sentimentCnt, '1d');
+            //this.d1 = element.sentimentCnt;
+          } else if (element.sentimentName == "Sad") {
+            this.$cookies.set('Sad', element.sentimentCnt, '1d');
+            //this.d2 = element.sentimentCnt;
+          } else {
+            this.$cookies.set('Soso', element.sentimentCnt, '1d');
+            //this.chartData.datasets[0].data[2] = element.sentimentCnt;
+          }
+
+          //   this.days.push({
+          //     id: element.year + "-" + element.month + "-" + element.day,
+          //     date: element.year + "-" + element.month + "-" + element.day,
+          //     sentimentColor: element.sentimentColor,
+          //     sentimentName: element.sentimentName,
+          //   });
+        });
+      });
+    },
     /**
      * Trigger
      */

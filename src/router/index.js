@@ -82,7 +82,7 @@ const routes = [
 function requireAuth(to, from, next) {
   //const { $cookies } = router.app.config.globalProperties;
   let access_token = Vue.$cookies.get("user");
-  //console.log(access_token);
+  console.log(access_token);
   if (access_token) {
     next();
   } else {
