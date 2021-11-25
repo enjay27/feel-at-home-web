@@ -9,6 +9,14 @@
             <h4 class="card-title">{{ item.display_name }}</h4>
             <p class="card-text">{{ item.email }}</p>
             <a
+              v-show="!item.follow"
+              style="cursor: pointer"
+              @click="follow(item.member_id)"
+              class="btn btn-primary"
+              >Follow</a
+            >
+            <a
+              v-show="item.follow"
               style="cursor: pointer"
               @click="unfollow(item.member_id)"
               class="btn btn-danger"
@@ -39,6 +47,14 @@ export default {
         this.users = response.data;
         console.log(this.users);
       });
+  },
+  methods: {
+    follow(memberId) {
+      console.log(memberId);
+    },
+    unfollow(memberId) {
+      console.log(memberId);
+    },
   },
 };
 </script>
