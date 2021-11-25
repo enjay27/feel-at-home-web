@@ -11,7 +11,7 @@ var request = require("request");
 var optionParams = {
   q: "happy+joyful music",
   part: "snippet",
-  key: "AIzaSyDM8JWz9iYaot1zA-vfg958ILve3PkKnew",
+  key: "AIzaSyDRB0oeLZ7nmp0IDdtBbpqUrEvThQGHg1M",
   type: "video",
   maxResults: 3,
   regionCode: "KR",
