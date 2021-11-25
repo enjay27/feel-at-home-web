@@ -15,6 +15,7 @@ import Follow from "@/views/Follow.vue";
 import Following from "@/components/follow/Following.vue";
 import Follower from "@/components/follow/Follower.vue";
 import Search from "@/components/follow/Search.vue";
+import LikelistPage from "@/views/LikelistPage.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
@@ -104,6 +105,11 @@ const routes = [
         component: Search,
       },
     ],
+  },
+  {
+    path: "/likelist",
+    name: "Likelist",
+    component: LikelistPage,
   },
 ];
 

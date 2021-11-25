@@ -23,10 +23,13 @@ export default {
     var index = Math.floor(Math.random() * test.arrID.length);
     return {
       index: index,
-      like: false,
       videoId: test.arrID[index],
       videoTitle: test.arrTitle[index],
+      musics: [],
     };
+  },
+  mounted() {
+    this.musics = JSON.parse(localStorage.music);
   },
   methods: {
     playVideo() {
@@ -43,16 +46,15 @@ export default {
       console.log("stop!");
     },
     likeButton() {
-      var music = JSON.parse(localStorage.music);
       var musicObject = {
         member_id: this.$cookies.get("user").data.member_id,
-        song_id: music[this.index].song_id,
+        song_id: this.musics[this.index].song_id,
       };
 
       console.log(musicObject);
 
-      if (!this.like) {
-        this.like = true;
+      if (!this.musics[this.index].islike) {
+        this.musics[this.index].islike = true;
 
         axios
           .post("http://localhost:8077/music/url", musicObject)
@@ -61,15 +63,22 @@ export default {
             console.log(musicObject.song_id + "를 플레이리스트에 등록");
           });
       } else {
-        this.like = false;
+        this.musics[this.index].islike = false;
 
         axios
-          .delete("http://localhost:8077/music/url", musicObject)
+          .delete("http://localhost:8077/music/url", {
+            data: {
+              member_id: this.$cookies.get("user").data.member_id,
+              song_id: this.musics[this.index].song_id,
+            },
+          })
           .then((response) => {
             console.log(response);
-            console.log(musicObject.song_id + "를 플레이리스트에 등록");
+            console.log(musicObject.song_id + "를 플레이리스트에 등록해제");
           });
       }
+
+      localStorage.music = JSON.stringify(this.musics);
     },
   },
   computed: {
