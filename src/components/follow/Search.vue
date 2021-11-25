@@ -74,6 +74,27 @@ export default {
       },
     },
   },
+  methods: {
+    follow(index) {
+      console.log("follow " + this.users[index].member_id);
+      var params = {
+        memberId: this.user.member_id,
+        followId: this.users[index].member_id,
+      };
+      axios.post("http://localhost:8077/user/follow", params);
+      this.users[index].follow = true;
+    },
+    unfollow(index) {
+      console.log("unfollow " + this.users[index].member_id);
+      axios.delete("http://localhost:8077/user/follow", {
+        params: {
+          memberId: this.user.member_id,
+          followId: this.users[index].member_id,
+        },
+      });
+      this.users[index].follow = false;
+    },
+  },
 };
 </script>
 

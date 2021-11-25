@@ -9,8 +9,16 @@
             <h4 class="card-title">{{ item.display_name }}</h4>
             <p class="card-text">{{ item.email }}</p>
             <a
+              v-show="!item.follow"
               style="cursor: pointer"
-              @click="unfollow(item.member_id)"
+              @click="follow(index)"
+              class="btn btn-primary"
+              >Follow</a
+            >
+            <a
+              v-show="item.follow"
+              style="cursor: pointer"
+              @click="unfollow(index)"
               class="btn btn-danger"
               >Unfollow</a
             >
@@ -28,6 +36,7 @@ export default {
   data() {
     return {
       users: [],
+      user: null,
     };
   },
   created() {
@@ -39,6 +48,27 @@ export default {
         this.users = response.data;
         console.log(this.users);
       });
+  },
+  methods: {
+    follow(index) {
+      console.log("follow " + this.users[index].member_id);
+      var params = {
+        memberId: this.user.member_id,
+        followId: this.users[index].member_id,
+      };
+      axios.post("http://localhost:8077/user/follow", params);
+      this.users[index].follow = true;
+    },
+    unfollow(index) {
+      console.log("unfollow " + this.users[index].member_id);
+      axios.delete("http://localhost:8077/user/follow", {
+        params: {
+          memberId: this.user.member_id,
+          followId: this.users[index].member_id,
+        },
+      });
+      this.users[index].follow = false;
+    },
   },
 };
 </script>

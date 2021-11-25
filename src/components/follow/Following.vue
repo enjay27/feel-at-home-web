@@ -10,7 +10,7 @@
             <p class="card-text">{{ item.email }}</p>
             <a
               style="cursor: pointer"
-              @click="follow(item.member_id)"
+              @click="unfollow(item.member_id)"
               class="btn btn-danger"
               >Unfollow</a
             >
@@ -39,6 +39,18 @@ export default {
         this.users = response.data;
         console.log(this.users);
       });
+  },
+  methods: {
+    unfollow(index) {
+      console.log("unfollow " + this.users[index].member_id);
+      axios.delete("http://localhost:8077/user/follow", {
+        params: {
+          memberId: this.user.member_id,
+          followId: this.users[index].member_id,
+        },
+      });
+      this.users[index].follow = false;
+    },
   },
 };
 </script>
