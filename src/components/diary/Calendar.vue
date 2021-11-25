@@ -226,7 +226,7 @@ export default {
           this.sentimentColor = "red";
           this.sentimentName = "Sad";
         }
-        alert(msg + this.sentimentName);
+        //alert(msg + this.sentimentName);
     },
     /**
      * check Data Status and add/remove data
@@ -281,7 +281,7 @@ export default {
           if (data === "success") {
             msg = "등록이 완료되었습니다.";
           }
-          alert(msg);
+          //alert(msg);
         }).then(()=>{
           this.getCharData();
         });
@@ -349,7 +349,7 @@ export default {
      * move Statics Route
      */
     moveStatics(){
-      alert("Click");
+      //alert("Click");
       this.$router.push('Statics');
     }
 
