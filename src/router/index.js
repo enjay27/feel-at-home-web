@@ -11,6 +11,7 @@ import Player2 from "@/components/music/MusicPlayer copy.vue";
 import Player3 from "@/components/music/MusicPlayer copy 2.vue";
 import About from "@/views/About.vue";
 import Mypage from "@/views/Mypage.vue";
+import Follow from "@/views/Follow.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueYoutube);
@@ -76,6 +77,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     //component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/follow",
+    name: "Follow",
+    component: Follow,
   },
 ];
 

@@ -55,7 +55,7 @@
               v-show="isLogin"
               @click="logout()"
               class="tooltips"
-              style="color: white"
+              style="color: white; cursor: pointer"
             >
               <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
               <span class="tooltipstext">Logut</span>
@@ -69,12 +69,9 @@
               <!-- <button v-show="isLogin" class="order_online">Mypage</button> -->
             </router-link>
 
-            <button
-              class="order_online"
-              onclick="location.href='https://www.spotify.com/'"
-            >
-              Share With Friends
-            </button>
+            <router-link :to="{ name: 'Follow' }">
+              <button class="order_online">Share With Friends</button>
+            </router-link>
           </div>
         </div>
       </nav>
@@ -107,6 +104,7 @@ export default {
   },
   created() {
     if (this.$cookies.isKey("user")) {
+      //this.$cookies.set("키", "값", "만료일");
       const user = this.$cookies.get("user");
       this.user = user;
       this.isLogin = true;
