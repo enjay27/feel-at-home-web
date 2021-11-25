@@ -107,6 +107,7 @@ export default {
   },
   created() {
     if (this.$cookies.isKey("user")) {
+      //this.$cookies.set("키", "값", "만료일");
       const user = this.$cookies.get("user");
       this.user = user;
       this.isLogin = true;
