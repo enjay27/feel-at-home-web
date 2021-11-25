@@ -13,12 +13,11 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-music-button" @click="$emit('go')">
-                <i class="fas fa-music"></i>&ensp; Go To Music&ensp;
-                <i class="fas fa-music"></i>
+              <button class="modal-not-yet-button" @click="$emit('go')">
+                Go To Music🎧
               </button>
-              <button class="modal-default-button" @click="$emit('close')">
-                <i class="far fa-window-close"></i>&ensp;Not Yet
+              <button class="modal-not-yet-button" @click="$emit('close')">
+                Not Yet
               </button>
             </slot>
           </div>
@@ -32,7 +31,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -77,8 +76,14 @@ export default {};
   margin: 20px 0;
 }
 
-.modal-default-button {
+.modal-not-yet-button {
   float: right;
+  background-color: #ffbe33;
+  border: 0;
+  border-radius: 7px;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
 }
 .modal-enter {
   opacity: 0;
