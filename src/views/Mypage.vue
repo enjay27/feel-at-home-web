@@ -26,16 +26,12 @@
               <dd>{{ user.country }}</dd>
             </dl>
           </div>
-          <div class="list-body">
-            <table>
-              <tr>
-                <th>Title</th>
-              </tr>
-              <tr v-for="item in items" :key="item.title">
-                <td><span v-html="item.title"></span></td>
-              </tr>
-            </table>
-          </div>
+        </div>
+        <div class="btn-box">
+          <router-link :to="{ name: 'Likelist' }" class="btn1">
+            Go to Likelist</router-link
+          >
+          <!-- <a href="" class="btn1"> Discover Your Feeling </a> -->
         </div>
       </div>
     </div>
