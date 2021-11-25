@@ -12,6 +12,9 @@ import Player3 from "@/components/music/MusicPlayer copy 2.vue";
 import About from "@/views/About.vue";
 import Mypage from "@/views/Mypage.vue";
 import Follow from "@/views/Follow.vue";
+import Following from "@/components/follow/Following.vue";
+import Follower from "@/components/follow/Follower.vue";
+import Search from "@/components/follow/Search.vue";
 import LikelistPage from "@/views/LikelistPage.vue";
 
 Vue.use(VueRouter);
@@ -82,7 +85,26 @@ const routes = [
   {
     path: "/follow",
     name: "Follow",
+    redirect: "/follow/search",
     component: Follow,
+    props: true,
+    children: [
+      {
+        path: "following",
+        name: "Following",
+        component: Following,
+      },
+      {
+        path: "follower",
+        name: "Follower",
+        component: Follower,
+      },
+      {
+        path: "search",
+        name: "Search",
+        component: Search,
+      },
+    ],
   },
   {
     path: "/likelist",
