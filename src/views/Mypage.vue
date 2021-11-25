@@ -12,15 +12,9 @@
               <dd>{{ user.id }}</dd>
               <dt>Email</dt>
               <dd>{{ user.email }}</dd>
-              <dt>Spotify URI</dt>
+              <dt>Spotify Mypage</dt>
               <dd>
-                <a :href="user.external_urls.spotify">{{
-                  user.external_urls.spotify
-                }}</a>
-              </dd>
-              <dt>Link</dt>
-              <dd>
-                <a :href="user.href">{{ user.href }}</a>
+                <a :href="user.external_urls.spotify">Go To Spotify</a>
               </dd>
               <dt>Country</dt>
               <dd>{{ user.country }}</dd>
