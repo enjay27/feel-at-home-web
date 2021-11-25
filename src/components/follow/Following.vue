@@ -40,6 +40,11 @@ export default {
         console.log(this.users);
       });
   },
+  methods: {
+    follow(memberId) {
+      console.log(memberId);
+    },
+  },
 };
 </script>
 

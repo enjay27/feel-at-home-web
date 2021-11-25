@@ -15,18 +15,18 @@
         </div>
         <div class="col-md-4">
           <div class="heading_container heading_center">
-            <router-link :to="{ name: 'Follower' }">
+            <router-link :to="{ name: 'Following' }">
               <h2 style="padding-bottom: 5px; border-bottom: 2px solid black">
-                Follower : {{ user.followers }}
+                Following : {{ user.following }}
               </h2>
             </router-link>
           </div>
         </div>
         <div class="col-md-4">
           <div class="heading_container heading_center">
-            <router-link :to="{ name: 'Following' }">
+            <router-link :to="{ name: 'Follower' }">
               <h2 style="padding-bottom: 5px; border-bottom: 2px solid black">
-                Following : {{ user.following }}
+                Follower : {{ user.followers }}
               </h2>
             </router-link>
           </div>

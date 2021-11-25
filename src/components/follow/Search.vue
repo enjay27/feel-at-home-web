@@ -74,6 +74,14 @@ export default {
       },
     },
   },
+  methods: {
+    follow(memberId) {
+      console.log(memberId);
+    },
+    unfollow(memberId) {
+      console.log(memberId);
+    },
+  },
 };
 </script>
 
