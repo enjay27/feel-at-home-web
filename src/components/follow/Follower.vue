@@ -1,27 +1,29 @@
 <template>
   <div id="follower">
-    <br />
-    <div id="users" class="row">
-      <div class="col-md-1" />
-      <div class="col-md-6">
-        <div class="card" v-for="(item, index) in users" :key="index">
-          <div class="card-body">
-            <h4 class="card-title">{{ item.display_name }}</h4>
-            <p class="card-text">{{ item.email }}</p>
-            <a
-              v-show="!item.follow"
-              style="cursor: pointer"
-              @click="follow(index)"
-              class="btn btn-primary"
-              >Follow</a
-            >
-            <a
-              v-show="item.follow"
-              style="cursor: pointer"
-              @click="unfollow(index)"
-              class="btn btn-danger"
-              >Unfollow</a
-            >
+    <div class="container">
+      <br />
+      <div id="users" class="row">
+        <div class="col-md-1" />
+        <div class="col-md-6">
+          <div class="card" v-for="(item, index) in users" :key="index">
+            <div class="card-body">
+              <h4 class="card-title">{{ item.display_name }}</h4>
+              <p class="card-text">{{ item.email }}</p>
+              <a
+                v-show="!item.follow"
+                style="cursor: pointer"
+                @click="follow(index)"
+                class="btn btn-primary"
+                >Follow</a
+              >
+              <a
+                v-show="item.follow"
+                style="cursor: pointer"
+                @click="unfollow(index)"
+                class="btn btn-danger"
+                >Unfollow</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -58,6 +60,7 @@ export default {
       };
       axios.post("http://localhost:8077/user/follow", params);
       this.users[index].follow = true;
+      this.$emit("follow", 1);
     },
     unfollow(index) {
       console.log("unfollow " + this.users[index].member_id);
@@ -68,6 +71,7 @@ export default {
         },
       });
       this.users[index].follow = false;
+      this.$emit("follow", -1);
     },
   },
 };
