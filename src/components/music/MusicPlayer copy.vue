@@ -14,13 +14,15 @@
 //https://developers.google.com/youtube/iframe_api_reference
 
 import test from "@/util/youtube copy.js";
+import axios from "axios";
 
 export default {
   name: "player2",
   //TQtsnpgyp6E
   data() {
-    var index = Math.floor(Math.random() * 10);
+    var index = Math.floor(Math.random() * test.arrID.length);
     return {
+      index: index,
       like: false,
       videoId: test.arrID[index],
       videoTitle: test.arrTitle[index],
@@ -41,14 +43,32 @@ export default {
       console.log("stop!");
     },
     likeButton() {
+      var music = JSON.parse(localStorage.music);
+      var musicObject = {
+        member_id: this.$cookies.get("user").data.member_id,
+        song_id: music[this.index].song_id,
+      };
+
+      console.log(musicObject);
+
       if (!this.like) {
         this.like = true;
-        console.log(this.videoId + "를 플레이리스트에 등록");
-        // this.videoId 를 통해 현재 내 플레이리스트로 ID 값을 넘겨줌
+
+        axios
+          .post("http://localhost:8077/music/url", musicObject)
+          .then((response) => {
+            console.log(response);
+            console.log(musicObject.song_id + "를 플레이리스트에 등록");
+          });
       } else {
         this.like = false;
-        console.log(this.videoId + "를 플레이리스트에서 등록취소");
-        // 등록 취소
+
+        axios
+          .delete("http://localhost:8077/music/url", musicObject)
+          .then((response) => {
+            console.log(response);
+            console.log(musicObject.song_id + "를 플레이리스트에 등록");
+          });
       }
     },
   },
