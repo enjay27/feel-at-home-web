@@ -64,7 +64,12 @@ export default {
         this.like = false;
 
         axios
-          .delete("http://localhost:8077/music/url", musicObject)
+          .delete("http://localhost:8077/music/url", {
+            data: {
+              member_id: this.$cookies.get("user").data.member_id,
+              song_id: music[this.index].song_id,
+            },
+          })
           .then((response) => {
             console.log(response);
             console.log(musicObject.song_id + "를 플레이리스트에 등록");
